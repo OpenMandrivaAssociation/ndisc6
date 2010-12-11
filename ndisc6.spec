@@ -1,6 +1,6 @@
 %define name ndisc6
 %define version 0.9.8
-%define release %mkrel 2
+%define release %mkrel 3
 
 Summary: IPv6 diagnostic tools
 Name: %{name}
