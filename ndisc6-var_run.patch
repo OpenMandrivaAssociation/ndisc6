@@ -1,0 +1,11 @@
+--- rdnssd/Makefile.in.orig	2010-11-16 20:14:41.000000000 +0100
++++ rdnssd/Makefile.in	2011-06-24 14:45:24.040828625 +0200
+@@ -604,7 +604,6 @@
+ 
+ install-data-hook:
+ 	$(install_sh) -d -- $(DESTDIR)$(myrundir)
+-	-chown -- nobody $(DESTDIR)$(myrundir)
+ 
+ uninstall-hook:
+ 	-rmdir $(DESTDIR)$(myrundir)
+
