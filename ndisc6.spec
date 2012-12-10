@@ -91,3 +91,22 @@ the DNS resolvers configuration (/etc/resolv.conf) accordingly.
 %attr(755,root,root) %{_sysconfdir}/rdnssd/merge-hook
 %dir %attr(0755,rdnssd,nogroup) %{_var}/run/rdnssd
 
+
+
+%changelog
+* Fri Dec 23 2011 Andrey Bondrov <abondrov@mandriva.org> 1.0.2-1
++ Revision: 744839
+- New version 1.0.2, major spec update (based on P. Makowski's work in Mageia)
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - the mass rebuild of 2010.0 packages
+
+* Mon Sep 14 2009 Thierry Vignaud <tv@mandriva.org> 0.9.8-2mdv2010.0
++ Revision: 440242
+- rebuild
+
+* Sat Nov 29 2008 Olivier Thauvin <nanardon@mandriva.org> 0.9.8-1mdv2009.1
++ Revision: 307781
+- import ndisc6
+
+

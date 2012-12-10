@@ -1,0 +1,110 @@
+#!/bin/bash
+#
+# rdnssd start/stop script for Mageia
+#	/etc/rc.d/init.d/rdnssd
+#
+# Starts the rdnssd daemon
+#
+# chkconfig: 2345 55 25
+# description: IPv6 Recursive DNS Server discovery
+# processname: rdnssd
+#
+### BEGIN INIT INFO
+# Provides:          rdnssd
+# Required-Start:    $network
+# Required-Stop:     $network
+# Short-Description: IPv6 Recursive DNS Server discovery
+# Description:       RDNSS daemon for autoconfiguration of IPv6 DNS
+#                    resolvers.
+# Default-Start:     2 3 4 5
+### END INIT INFO
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+DAEMON=rdnssd
+OPTIONS="-u rdnssd"
+MERGE_HOOK=/etc/rdnssd/merge-hook 
+
+test -x /usr/sbin/$DAEMON || exit 0
+
+RETVAL=0
+
+if [ -n "$MERGE_HOOK" ]; then
+	OPTIONS="$OPTIONS -H $MERGE_HOOK"
+fi
+
+
+check_run_dir() {
+	if [ ! -d "/var/run/$NAME" ]; then
+		mkdir -p "/var/run/$NAME"
+		chown rdnssd:nogroup "/var/run/$NAME"
+		chmod 0755 "/var/run/$NAME"
+	fi
+}
+
+#
+# See how we were called.
+#
+
+start() {
+	# Check if it is already running
+	if [ ! -f /var/lock/subsys/$DAEMON ]; then
+            check_run_dir
+	    gprintf "Starting %s daemon: " "$DAEMON"
+	    daemon /usr/sbin/$DAEMON $OPTIONS
+	    RETVAL=$?
+	    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/$DAEMON
+	    echo
+	fi
+	return $RETVAL
+}
+
+stop() {
+	gprintf "Stopping %s daemon: " "$DAEMON"
+	killproc /usr/sbin/$DAEMON
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$DAEMON
+	echo
+        return $RETVAL
+}
+
+restart() {
+	stop
+        sleep 1
+	start
+}	
+
+reload() {
+	trap "" SIGHUP
+	killall -HUP $DAEMON
+}	
+
+case "$1" in
+start)
+	start
+	;;
+stop)
+	stop
+	;;
+reload)
+	reload
+	;;
+restart)
+	restart
+	;;
+condrestart)
+	if [ -f /var/lock/subsys/$DAEMON ]; then
+	    restart
+	fi
+	;;
+status)
+	status $DAEMON
+	;;
+*)
+	INITNAME=`basename $0`
+	gprintf "Usage: %s {start|stop|restart|condrestart|status}\n" "$INITNAME"
+	exit 1
+esac
+
+exit $RETVAL
