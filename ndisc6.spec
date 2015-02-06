@@ -1,6 +1,6 @@
 Name:		ndisc6
 Version:	1.0.2
-Release:	%mkrel 1
+Release:	2
 Summary:	IPv6 diagnostic tools
 Group:		Networking/Other
 License:	GPLv2 or GPLv3
