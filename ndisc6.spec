@@ -4,7 +4,7 @@ Release:	2
 Summary:	IPv6 diagnostic tools
 Group:		Networking/Other
 License:	GPLv2 or GPLv3
-URL:		http://www.remlab.net/ndisc6/
+URL:		https://www.remlab.net/ndisc6/
 Source0:	http://www.remlab.net/files/ndisc6/%{name}-%{version}.tar.bz2
 Source1:	rdnssd.rc
 Patch1:		ndisc6-var_run.patch
