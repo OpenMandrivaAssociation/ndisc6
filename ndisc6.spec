@@ -9,6 +9,11 @@ Source0:	http://www.remlab.net/files/ndisc6/%{name}-%{version}.tar.bz2
 Source1:	rdnssd.rc
 Patch1:		ndisc6-var_run.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 This package gathers a few diagnostic tools for IPv6 networks:
 - ndisc6, which performs ICMPv6 Neighbor Discovery in userland,
